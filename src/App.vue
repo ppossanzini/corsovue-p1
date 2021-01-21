@@ -1,32 +1,28 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    
+    <table v-if="ape">
+      <thead>
+        <tr>
+          <td v-for="c in columns" :key="c">{{ c }}</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="i in ape" :key="i.id" @click="item = Object.assign({},i)">
+          <td v-for="c in columns" :key="`${i.id}-${c}`">{{ i[c] }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <section v-if="item">
+      <div class="cell">
+        <input v-model="item.scEmail">
+      </div>
+    </section>
+    <div id="map">qui ci va la mappa</div>
+    <router-view />
   </div>
 </template>
-
+<script lang="ts" src="./App.ts"></script> 
 <style lang="less">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
+@import url(./App.less);
 </style>
